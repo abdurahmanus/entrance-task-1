@@ -1,47 +1,47 @@
-const { models, sequelize } = require('./models');
+const { models, sequelize } = require("./models");
 
-function createData () {
+function createData() {
   let usersPromise = models.User.bulkCreate([
     {
-      login: 'veged',
-      avatarUrl: 'https://avatars3.githubusercontent.com/u/15365?s=460&v=4',
+      login: "veged",
+      avatarUrl: "https://avatars3.githubusercontent.com/u/15365?s=460&v=4",
       homeFloor: 0
     },
     {
-      login: 'alt-j',
-      avatarUrl: 'https://avatars1.githubusercontent.com/u/3763844?s=400&v=4',
+      login: "alt-j",
+      avatarUrl: "https://avatars1.githubusercontent.com/u/3763844?s=400&v=4",
       homeFloor: 3
     },
     {
-      login: 'yeti-or',
-      avatarUrl: 'https://avatars0.githubusercontent.com/u/1813468?s=460&v=4',
+      login: "yeti-or",
+      avatarUrl: "https://avatars0.githubusercontent.com/u/1813468?s=460&v=4",
       homeFloor: 2
     }
   ]);
 
   let roomsPromise = models.Room.bulkCreate([
     {
-      title: '404',
+      title: "404",
       capacity: 5,
       floor: 4
     },
     {
-      title: 'Деньги',
+      title: "Деньги",
       capacity: 4,
       floor: 2
     },
     {
-      title: 'Карты',
+      title: "Карты",
       capacity: 4,
       floor: 2
     },
     {
-      title: 'Ствола',
+      title: "Ствола",
       capacity: 2,
       floor: 2
     },
     {
-      title: '14',
+      title: "14",
       capacity: 6,
       floor: 3
     }
@@ -55,29 +55,31 @@ function createData () {
 
   let eventsPromise = models.Event.bulkCreate([
     {
-      title: 'ШРИ 2018 - начало',
+      title: "ШРИ 2018 - начало",
       dateStart: now,
       dateEnd: oneHourLater
     },
     {
-      title: '👾 Хакатон 👾',
+      title: "👾 Хакатон 👾",
       dateStart: oneHourLater,
       dateEnd: twoHoursLater
     },
     {
-      title: '🍨 Пробуем kefir.js',
+      title: "🍨 Пробуем kefir.js",
       dateStart: threeHoursLater,
       dateEnd: twoHoursLater
     }
   ]);
 
   Promise.all([usersPromise, roomsPromise, eventsPromise])
-    .then(() => Promise.all([
-      models.User.findAll(),
-      models.Room.findAll(),
-      models.Event.findAll()
-    ]))
-    .then(function ([users, rooms, events]) {
+    .then(() =>
+      Promise.all([
+        models.User.findAll(),
+        models.Room.findAll(),
+        models.Event.findAll()
+      ])
+    )
+    .then(function([users, rooms, events]) {
       let promises = [];
       promises.push(events[0].setRoom(rooms[0]));
       promises.push(events[1].setRoom(rooms[1]));
@@ -91,5 +93,4 @@ function createData () {
     });
 }
 
-sequelize.sync()
-  .then(createData);
+sequelize.sync().then(createData);
