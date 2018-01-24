@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 
-const graphqlHTTP = require("express-graphql");
-const { makeExecutableSchema } = require("graphql-tools");
+const graphqlHTTP = require('express-graphql');
+const { makeExecutableSchema } = require('graphql-tools');
 
-const typeDefs = require("./typeDefs");
-const resolvers = require("./resolvers");
+const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
 
 const router = express.Router();
 
