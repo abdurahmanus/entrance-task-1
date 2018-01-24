@@ -11,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "semistandard",
-    "reset-db": "rm -f ./db.sqlite3 && node create-mock-data.js",
+    "reset-db": "rimraf ./db.sqlite3 && node create-mock-data.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "nodemon": "^1.12.5",
+    "rimraf": "^2.6.2",
     "semistandard": "^11.0.0"
   }
 }
